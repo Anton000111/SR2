@@ -1,8 +1,8 @@
-const writeLine = require('./write_line');
+const { MANUAL } = require('../constants');
+const renderFromConstant = require('./render_from_constant');
 
 const renderManual = () => {
-  writeLine('Use W, A, S, D keys for navigation');
-  writeLine('Press Enter to run executable command\n');
+  renderFromConstant(MANUAL);
 }
 
 module.exports = renderManual;
