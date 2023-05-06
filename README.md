@@ -33,5 +33,6 @@ Example:
 }
 ```
 
-Result:
+Run `sr2` inside the folder with `sr2.json` file
+
 ![image](https://user-images.githubusercontent.com/40431545/236634562-2578ee69-21b5-44f9-a855-a9f8810c1f37.png)
