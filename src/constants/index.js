@@ -9,7 +9,13 @@ const AFTER_EXECUTION = {
   MANUAL: 'Use W, A, S, D keys to return to navigation'
 };
 
+const ENTITY_TYPES = {
+  COMMAND: 'command',
+  SECTION: 'section',
+};
+
 module.exports = {
   MANUAL,
   AFTER_EXECUTION,
+  ENTITY_TYPES,
 }
