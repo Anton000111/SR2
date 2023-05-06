@@ -1,0 +1,19 @@
+{
+  "name": "sr2",
+  "version": "0.0.1",
+  "description": "Simple runner for your scripts",
+  "main": "index.js",
+  "bin": {
+    "sr2": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anton000111/SR2.git"
+  },
+  "author": "Anton Mikheyeu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anton000111/SR2/issues"
+  },
+  "homepage": "https://github.com/Anton000111/SR2#readme"
+}
