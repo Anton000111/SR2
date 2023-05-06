@@ -1,5 +1,6 @@
 const { execSync } = require("child_process");
-const { getCharCode, clear } = require('./utils');
+const { getCharCode, clear, renderFromConstant } = require('./utils');
+const { AFTER_EXECUTION } = require('./constants');
 const { getCurrentLayer, address } = require('./navigate');
 
 const { env: { PWD: cwd } } = process;
@@ -11,6 +12,8 @@ const exec = command => {
     cwd,
     stdio: 'inherit',
   });
+
+  renderFromConstant(AFTER_EXECUTION);
 };
 
 const execCommand = key => {
