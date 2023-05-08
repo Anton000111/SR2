@@ -1,38 +1,59 @@
-const { execSync } = require("child_process");
+const { exec: execChild } = require("child_process");
 const { getCharCode, clear, renderFromConstant } = require('./utils');
-const { AFTER_EXECUTION } = require('./constants');
+const { AFTER_EXECUTION, ENTITY_TYPES } = require('./constants');
 const { getCurrentLayer, address } = require('./navigate');
-
-const { env: { PWD: cwd } } = process;
 
 const exec = command => {
   clear();
 
-  execSync(command, {
-    cwd,
-    stdio: 'inherit',
+  const subprocess = execChild(command);
+
+  subprocess.stdout.setEncoding('utf-8');
+
+  subprocess.stdout.on('data', chunk => {
+    console.log(chunk);
   });
 
-  renderFromConstant(AFTER_EXECUTION);
+  subprocess.on('close', () => {
+    renderFromConstant(AFTER_EXECUTION);
+  });
+
+  return subprocess.stdout;
+};
+
+const execCommandByKey = key => {
+  const currentLayer = getCurrentLayer();
+  const runCommand = currentLayer[key];
+
+  if (typeof runCommand === 'string') {
+    return exec(runCommand);
+  }
+
+  if (Array.isArray(runCommand)) {
+    return exec(runCommand.join(' && '));;
+  }
+
+  if(runCommand.__type === ENTITY_TYPES.COMMAND) {
+    if (typeof runCommand.value === 'string') {
+      return exec(runCommand.value);
+    } else if (Array.isArray(runCommand.value)) {
+      return exec(runCommand.value.join(' && '));
+    }
+  }
 };
 
 const execCommand = key => {
   const { code } = getCharCode(key);
 
   if (code === 13) {
-    const currentLayer = getCurrentLayer();
     const currentKey = address[address.length - 1];
 
-    const runCommand = currentLayer[currentKey];
-
-    if (typeof runCommand === 'string') {
-      exec(runCommand);
-    }
-
-    if (Array.isArray(runCommand)) {
-      exec(runCommand.join(' && '));
-    }
+    execCommandByKey(currentKey);
   }
 };
 
-module.exports = execCommand;
+module.exports = {
+  execCommand,
+  exec,
+  execCommandByKey,
+};

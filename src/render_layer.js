@@ -1,5 +1,6 @@
 const { clear, writeLine, renderManual } = require('./utils');
 const { getCurrentLayer } = require('./navigate');
+const { ENTITY_TYPES } = require('./constants');
 
 const renderLayer = address => {
   clear();
@@ -44,7 +45,9 @@ const renderLayer = address => {
 
   const nextLayer = currentLayer[key];
 
-  if (Array.isArray(nextLayer) || typeof nextLayer === 'string') return writeLine('Executable command');
+  if (Array.isArray(nextLayer) || typeof nextLayer === 'string' || (nextLayer || {}).__type === ENTITY_TYPES.COMMAND) {
+    return writeLine('Executable command');
+  }
 
   writeLine('Section');
 };
