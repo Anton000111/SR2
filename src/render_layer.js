@@ -45,7 +45,7 @@ const renderLayer = address => {
 
   const nextLayer = currentLayer[key];
 
-  if (Array.isArray(nextLayer) || typeof nextLayer === 'string' || nextLayer.__type === ENTITY_TYPES.COMMAND) {
+  if (Array.isArray(nextLayer) || typeof nextLayer === 'string' || (nextLayer || {}).__type === ENTITY_TYPES.COMMAND) {
     return writeLine('Executable command');
   }
 
