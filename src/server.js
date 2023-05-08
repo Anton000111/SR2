@@ -10,9 +10,15 @@ const {
   updateCurrentKey,
   addKey,
 } = require('./navigate');
-const { execCommandByKey, consoleListeners } = require('./exec_command');
+const { execCommandByKey } = require('./exec_command');
 
 const runServer = () => {
+  let PORT = 5001;
+
+  const portFromEnv = process.argv.find(value => value.includes('PORT='));
+
+  if (portFromEnv) PORT = Number(portFromEnv.split('=')[1]);
+
   const app = express();
 
   app.use(cors());
@@ -46,17 +52,13 @@ const runServer = () => {
   });
   
   app.post('/execute', ({ body: { key } }, res) => {
-    execCommandByKey(key);
+    const readable = execCommandByKey(key);
 
-    res.send();
+    readable.pipe(res);
   });
   
-  app.get('/addWatcher', (_req, res) => {
-    consoleListeners.push(body => res.send(body));
-  });
-  
-  app.listen(5001, () => {
-    console.log(`SR2 server is running on port: 5001`);
+  app.listen(PORT, () => {
+    console.log(`SR2 server is running on port: ${PORT}`);
   });
 };
 

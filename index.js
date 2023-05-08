@@ -21,4 +21,4 @@ initStdIn(execCommand);
 
 initStdIn(inputListener);
 
-runServer();
+if (process.argv.includes('-u')) runServer();

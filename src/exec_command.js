@@ -3,8 +3,6 @@ const { getCharCode, clear, renderFromConstant } = require('./utils');
 const { AFTER_EXECUTION, ENTITY_TYPES } = require('./constants');
 const { getCurrentLayer, address } = require('./navigate');
 
-const consoleListeners = [];
-
 const exec = command => {
   clear();
 
@@ -14,21 +12,13 @@ const exec = command => {
 
   subprocess.stdout.on('data', chunk => {
     console.log(chunk);
-
-    while(consoleListeners.length) {
-      consoleListeners[consoleListeners.length - 1]({ data: chunk, isClosed: false });
-      consoleListeners.pop();
-    }
   });
 
   subprocess.on('close', () => {
     renderFromConstant(AFTER_EXECUTION);
-
-    while(consoleListeners.length) {
-      consoleListeners[consoleListeners.length - 1]({ data: '', isClosed: true });
-      consoleListeners.pop();
-    }
   });
+
+  return subprocess.stdout;
 };
 
 const execCommandByKey = key => {
@@ -36,20 +26,18 @@ const execCommandByKey = key => {
   const runCommand = currentLayer[key];
 
   if (typeof runCommand === 'string') {
-    exec(runCommand);
-    return;
+    return exec(runCommand);
   }
 
   if (Array.isArray(runCommand)) {
-    exec(runCommand.join(' && '));
-    return;
+    return exec(runCommand.join(' && '));;
   }
 
   if(runCommand.__type === ENTITY_TYPES.COMMAND) {
     if (typeof runCommand.value === 'string') {
-      exec(runCommand.value);
+      return exec(runCommand.value);
     } else if (Array.isArray(runCommand.value)) {
-      exec(runCommand.value.join(' && '));
+      return exec(runCommand.value.join(' && '));
     }
   }
 };
@@ -68,5 +56,4 @@ module.exports = {
   execCommand,
   exec,
   execCommandByKey,
-  consoleListeners,
 };
