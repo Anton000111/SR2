@@ -1,19 +1,34 @@
-const { execSync } = require("child_process");
+const { exec: execChild } = require("child_process");
 const { getCharCode, clear, renderFromConstant } = require('./utils');
 const { AFTER_EXECUTION, ENTITY_TYPES } = require('./constants');
 const { getCurrentLayer, address } = require('./navigate');
 
-const { env: { PWD: cwd } } = process;
+const consoleListeners = [];
 
 const exec = command => {
   clear();
 
-  execSync(command, {
-    cwd,
-    stdio: 'inherit',
+  const subprocess = execChild(command);
+
+  subprocess.stdout.setEncoding('utf-8');
+
+  subprocess.stdout.on('data', chunk => {
+    console.log(chunk);
+
+    while(consoleListeners.length) {
+      consoleListeners[consoleListeners.length - 1]({ data: chunk, isClosed: false });
+      consoleListeners.pop();
+    }
   });
 
-  renderFromConstant(AFTER_EXECUTION);
+  subprocess.on('close', () => {
+    renderFromConstant(AFTER_EXECUTION);
+
+    while(consoleListeners.length) {
+      consoleListeners[consoleListeners.length - 1]({ data: '', isClosed: true });
+      consoleListeners.pop();
+    }
+  });
 };
 
 const execCommandByKey = key => {
@@ -53,4 +68,5 @@ module.exports = {
   execCommand,
   exec,
   execCommandByKey,
+  consoleListeners,
 };

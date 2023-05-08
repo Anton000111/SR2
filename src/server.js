@@ -10,7 +10,7 @@ const {
   updateCurrentKey,
   addKey,
 } = require('./navigate');
-const { execCommandByKey } = require('./exec_command');
+const { execCommandByKey, consoleListeners } = require('./exec_command');
 
 const runServer = () => {
   const app = express();
@@ -49,6 +49,10 @@ const runServer = () => {
     execCommandByKey(key);
 
     res.send();
+  });
+  
+  app.get('/addWatcher', (_req, res) => {
+    consoleListeners.push(body => res.send(body));
   });
   
   app.listen(5001, () => {
