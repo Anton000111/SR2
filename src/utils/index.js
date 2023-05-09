@@ -9,7 +9,7 @@ const renderFromConstant = require('./render_from_constant');
 
 module.exports = {
   clear,
-  structure,
+  ...structure,
   writeLine,
   initStdIn,
   getCharCode,
