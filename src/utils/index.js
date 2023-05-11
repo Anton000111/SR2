@@ -6,6 +6,7 @@ const getCharCode = require('./get_char_code');
 const exitApp = require('./exit_app');
 const renderManual = require('./manual');
 const renderFromConstant = require('./render_from_constant');
+const getEnvVar = require('./getEnvVar');
 
 module.exports = {
   clear,
@@ -16,4 +17,5 @@ module.exports = {
   exitApp,
   renderManual,
   renderFromConstant,
+  getEnvVar,
 };

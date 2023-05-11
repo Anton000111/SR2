@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const { exec } = require('child_process');
 const {
   renderLayer,
   initStdIn,
@@ -7,6 +8,7 @@ const {
   exitApp,
   navigate: { address, addSubscrubers },
   execCommand,
+  getEnvVar,
 } = require('./src');
 
 const runServer = require('./src/server');
@@ -21,4 +23,18 @@ initStdIn(execCommand);
 
 initStdIn(inputListener);
 
-if (process.argv.includes('-u')) runServer();
+if (getEnvVar('-u')) {
+  const portDetection = getEnvVar('UI_PORT');
+
+  const portStr = portDetection ? `PORT=${portDetection}` : '';
+
+  exec(`sr2-ui ${portStr}`, error => {
+    console.log('\nYou are trying to run web ui interface for sr2');
+    console.log('Be sure that you have sr2_ui installed');
+    console.log('To install sr2_ui run `npm i -g sr2_ui`\n');
+    console.log(error);
+  }).stdout.on('data', line => {
+    console.log(line);
+  });
+  runServer();
+}

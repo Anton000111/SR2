@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-const { structure } = require('./utils');
+const { structure, getEnvVar } = require('./utils');
 const {
   addOneTimeSubscrubers,
   getCurrentLayer,
@@ -13,11 +13,7 @@ const {
 const { execCommandByKey } = require('./exec_command');
 
 const runServer = () => {
-  let PORT = 5001;
-
-  const portFromEnv = process.argv.find(value => value.includes('PORT='));
-
-  if (portFromEnv) PORT = Number(portFromEnv.split('=')[1]);
+  const PORT = Number(getEnvVar('PORT')) || 5001;
 
   const app = express();
 
