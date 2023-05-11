@@ -1,6 +1,6 @@
 {
   "name": "sr2",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple runner for your scripts",
   "main": "index.js",
   "bin": {
@@ -16,6 +16,12 @@
     "url": "https://github.com/Anton000111/SR2/issues"
   },
   "homepage": "https://github.com/Anton000111/SR2#readme",
+  "keywords": [
+    "nodejs",
+    "script",
+    "manual",
+    "package"
+  ],
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2"
