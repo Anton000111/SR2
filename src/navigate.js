@@ -1,4 +1,4 @@
-const { structureWithoutMeta } = require('./utils');
+const { structureWithoutMeta, structure } = require('./utils');
 const { ENTITY_TYPES } = require('./constants');
 
 const address = [Object.keys(structureWithoutMeta)[0]];
@@ -16,7 +16,7 @@ const getCurrentLayer = () => address.reduce((acc, key, index, { length }) => {
 const callAllSubscrubers = () => {
   subscrubers.forEach(subscruber => subscruber(address));
   while(oneTimeSubscribers.length) {
-    oneTimeSubscribers[oneTimeSubscribers.length - 1]({ structure: structureWithoutMeta, currentLayer: getCurrentLayer(), address });
+    oneTimeSubscribers[oneTimeSubscribers.length - 1]({ structure, currentLayer: getCurrentLayer(), address });
     oneTimeSubscribers.pop();
   }
 };
