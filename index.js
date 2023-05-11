@@ -11,7 +11,7 @@ const {
   getEnvVar,
 } = require('./src');
 
-const runServer = require('./src/server');
+const { runServer, getPort } = require('./src/server');
 
 renderLayer(address);
 
@@ -26,7 +26,7 @@ initStdIn(inputListener);
 if (getEnvVar('-u')) {
   const portDetection = getEnvVar('UI_PORT');
 
-  const portStr = portDetection ? `PORT=${portDetection}` : '';
+  const portStr = `SERVER_PORT=${getPort()}` + (portDetection ? ` PORT=${portDetection}` : '');
 
   exec(`sr2-ui ${portStr}`, error => {
     console.log('\nYou are trying to run web ui interface for sr2');
@@ -36,5 +36,6 @@ if (getEnvVar('-u')) {
   }).stdout.on('data', line => {
     console.log(line);
   });
+
   runServer();
 }

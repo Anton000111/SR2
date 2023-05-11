@@ -12,8 +12,12 @@ const {
 } = require('./navigate');
 const { execCommandByKey } = require('./exec_command');
 
+const getPort = () => (
+  Number(getEnvVar('PORT')) || 5001
+);
+
 const runServer = () => {
-  const PORT = Number(getEnvVar('PORT')) || 5001;
+  const PORT = getPort();
 
   const app = express();
 
@@ -50,7 +54,9 @@ const runServer = () => {
   app.post('/execute', ({ body: { key } }, res) => {
     const readable = execCommandByKey(key);
 
-    readable.pipe(res);
+    if (readable) return readable.pipe(res);
+
+    res.send();
   });
   
   app.listen(PORT, () => {
@@ -58,4 +64,7 @@ const runServer = () => {
   });
 };
 
-module.exports = runServer;
+module.exports = {
+  runServer,
+  getPort,
+};

@@ -3,10 +3,16 @@ const { getCharCode, clear, renderFromConstant } = require('./utils');
 const { AFTER_EXECUTION, ENTITY_TYPES } = require('./constants');
 const { getCurrentLayer, address } = require('./navigate');
 
+let executed = false;
+
 const exec = command => {
+  if (executed) return;
+
   clear();
 
   const subprocess = execChild(command);
+
+  executed = true;
 
   subprocess.stdout.setEncoding('utf-8');
 
@@ -15,6 +21,7 @@ const exec = command => {
   });
 
   subprocess.on('close', () => {
+    executed = false;
     renderFromConstant(AFTER_EXECUTION);
   });
 
