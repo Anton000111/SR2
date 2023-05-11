@@ -11,6 +11,13 @@ You can set road map of your app run and just run sr2 interfase
 ```bash
   npm i -g sr2
 ```
+
+### To use with ui web interface
+
+```bash
+  npm i -g sr2 sr2_ui
+```
+[Link to the npm page of sr2_ui](https://www.npmjs.com/package/sr2_ui)
     
 ## Usage/Examples
 
