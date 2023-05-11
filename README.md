@@ -2,6 +2,8 @@
 
 Simple runner for your scripts
 
+[GitHub repo](https://github.com/Anton000111/SR2)
+
 Utility allows to create simple interface for command execution to avoid long time onboarding
 
 You can set road map of your app run and just run sr2 interfase
