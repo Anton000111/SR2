@@ -38,7 +38,7 @@ const runServer = () => {
   app.post('/goInside', async ({ body: { key } }, res) => {
     updateCurrentKey(key);
 
-    await new Promise(res => setTimeout(res, 10));
+    await new Promise(res => setTimeout(res, 100));
 
     addKey(key);
 
