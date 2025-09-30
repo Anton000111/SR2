@@ -546,10 +546,6 @@ your-project/
 4. **Run your documentation**: `npm run docs`
 5. **Team members**: `npm install && npm run docs`
 
-## Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
