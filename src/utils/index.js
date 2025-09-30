@@ -7,6 +7,10 @@ const exitApp = require('./exit_app');
 const renderManual = require('./manual');
 const renderFromConstant = require('./render_from_constant');
 const getEnvVar = require('./getEnvVar');
+const postExecutionState = require('./post_execution_state');
+const commandExecutionState = require('./command_execution_state');
+const skipFirstEnter = require('./skip_first_enter');
+const descriptions = require('./descriptions');
 
 module.exports = {
   clear,
@@ -18,4 +22,8 @@ module.exports = {
   renderManual,
   renderFromConstant,
   getEnvVar,
+  ...postExecutionState,
+  ...commandExecutionState,
+  ...skipFirstEnter,
+  ...descriptions,
 };

@@ -1,3 +1,26 @@
 {
-  "update package": "npm i -g ./"
+  "update package": "npm i -g ./",
+  "Section": {
+    "Executable command 1": [
+      "echo Section",
+      "echo Executable command 1"
+    ],
+    "Executable command 2": "echo test 2",
+    "Section 3": {
+      "Executable command 3.1": [
+        "echo Section",
+        "echo Section 3",
+        "echo Executable command 3.1"
+      ],
+      "Executable command 3.2": "echo test 3.2"
+    },
+    "Executable command 4": [
+      "echo Section",
+      "echo Executable command 4"
+    ],
+    "Section 5": {
+      "Executable command 5.1": "echo test 5.1",
+      "Executable command 5.2": "echo test 5.2"
+    }
+  }
 }

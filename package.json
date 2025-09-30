@@ -1,7 +1,7 @@
 {
   "name": "sr2",
-  "version": "0.1.3",
-  "description": "Simple runner for your scripts",
+  "version": "0.2.0",
+  "description": "Simple runner and Interactive documentation tool",
   "main": "index.js",
   "bin": {
     "sr2": "./index.js"
@@ -22,8 +22,5 @@
     "manual",
     "package"
   ],
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2"
-  }
+  "dependencies": {}
 }

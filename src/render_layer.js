@@ -1,4 +1,4 @@
-const { clear, writeLine, renderManual } = require('./utils');
+const { clear, writeLine, renderManual, getDescription } = require('./utils');
 const { getCurrentLayer } = require('./navigate');
 const { ENTITY_TYPES } = require('./constants');
 
@@ -44,12 +44,27 @@ const renderLayer = address => {
   writeLine(separator);
 
   const nextLayer = currentLayer[key];
+  
+  // Build the path to the current section (excluding the current key)
+  const descriptionPath = [...address];
+  descriptionPath.pop(); // Remove the current key to get the parent path
+  
+  const description = getDescription(key, descriptionPath);
 
   if (Array.isArray(nextLayer) || typeof nextLayer === 'string' || (nextLayer || {}).__type === ENTITY_TYPES.COMMAND) {
-    return writeLine('Executable command');
+    writeLine('Executable command');
+    if (description) {
+      writeLine('');
+      writeLine(description);
+    }
+    return;
   }
 
   writeLine('Section');
+  if (description) {
+    writeLine('');
+    writeLine(description);
+  }
 };
 
 module.exports = renderLayer;
