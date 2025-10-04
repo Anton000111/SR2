@@ -7,14 +7,23 @@ const {
   exitApp,
   navigate: { address, addSubscrubers },
   execCommand,
+  showWelcomeAnimation,
 } = require('./src');
 
-renderLayer(address);
+const startApp = async () => {
+  // Show welcome animation
+  await showWelcomeAnimation();
+  
+  // Start the main application
+  renderLayer(address);
 
-addSubscrubers(renderLayer);
+  addSubscrubers(renderLayer);
 
-initStdIn(exitApp);
+  initStdIn(exitApp);
 
-initStdIn(execCommand);
+  initStdIn(execCommand);
 
-initStdIn(inputListener);
+  initStdIn(inputListener);
+};
+
+startApp();

@@ -11,6 +11,8 @@ const postExecutionState = require('./post_execution_state');
 const commandExecutionState = require('./command_execution_state');
 const skipFirstEnter = require('./skip_first_enter');
 const descriptions = require('./descriptions');
+const welcome = require('./welcome');
+const colors = require('./colors');
 
 module.exports = {
   clear,
@@ -26,4 +28,6 @@ module.exports = {
   ...commandExecutionState,
   ...skipFirstEnter,
   ...descriptions,
+  ...welcome,
+  ...colors,
 };

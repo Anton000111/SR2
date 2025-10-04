@@ -1,6 +1,6 @@
 {
   "name": "sr2",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Simple runner and Interactive documentation tool",
   "main": "index.js",
   "bin": {
@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/Anton000111/SR2#readme",
   "keywords": [
+    "doc",
+    "docs",
     "documentation",
     "nodejs",
     "script",
+    "executor",
     "manual",
     "package"
   ],

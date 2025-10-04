@@ -1,6 +1,7 @@
 const { clear, writeLine, renderManual, getDescription } = require('./utils');
 const { getCurrentLayer } = require('./navigate');
 const { ENTITY_TYPES } = require('./constants');
+const colors = require('./utils/colors');
 
 const renderLayer = address => {
   clear();
@@ -38,7 +39,7 @@ const renderLayer = address => {
   let separator = '';
 
   for (let length = 0; length <= columnWidth; length++) {
-    separator = separator + '-';
+    separator = separator + '═';
   }
 
   writeLine(separator);
@@ -55,7 +56,7 @@ const renderLayer = address => {
     writeLine('Executable command');
     if (description) {
       writeLine('');
-      writeLine(description);
+      writeLine(colors.yellow(description));
     }
     return;
   }
@@ -63,7 +64,7 @@ const renderLayer = address => {
   writeLine('Section');
   if (description) {
     writeLine('');
-    writeLine(description);
+    writeLine(colors.yellow(description));
   }
 };
 

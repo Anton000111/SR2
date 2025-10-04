@@ -6,7 +6,7 @@ const MANUAL = {
 };
 
 const AFTER_EXECUTION = {
-  SEPARATOR: '\n-------------------------------------------\n',
+  SEPARATOR: '\n═══════════════════════════════════\n',
   MANUAL: 'Press Enter to return to navigation'
 };
 
