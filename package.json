@@ -1,6 +1,6 @@
 {
   "name": "sr2",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Simple runner and Interactive documentation tool",
   "main": "index.js",
   "bin": {
